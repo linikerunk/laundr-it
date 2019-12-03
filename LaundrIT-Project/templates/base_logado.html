@@ -92,7 +92,7 @@
     })
   });
   </script>
-
+  
 <script>
         $(document).ready(function(){
             $("#add-item").click(function(ev) {
@@ -101,8 +101,10 @@
                 var tmplMarkup = $("#item-order").html();
                 var compiledTmpl = tmplMarkup.replace(/__prefix__/g, count);
                 $("div#order").append(compiledTmpl);
+
                 // update form count
-                $('#id_product-TOTAL_FORMS').attr('value', count =+ 1);
+                $('#id_product-TOTAL_FORMS').attr('value', count + 1);
+
                 // some animate to scroll to view our new form
                 $('html, body').animate({
                     scrollTop: $("#add-item").position().top-200

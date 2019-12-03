@@ -7,7 +7,7 @@ from .models import Item, Pedido, Roupa, Status, Suporte
 class PedidoForm(forms.ModelForm):
     class Meta:
         model = Pedido
-        fields = ['solicitante', 'pagamento', 'data_entrega']
+        fields = ['pagamento', 'data_entrega']
 
 
 
