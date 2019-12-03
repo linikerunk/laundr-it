@@ -1,0 +1,41 @@
+{% load static %}
+
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="{% url 'home' %}" class="logo">
+                <img src=" {% static 'img\logo.png' %} " alt="" style="width: 150px; height: 60px;">
+            </a>
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <!-- 
+                <a href="" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Alternar Navegação</span>
+                </a>
+                -->
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                          <li>
+                        <a href="{% url 'cadastro' %}">Cadastre-se</a>
+                        </li>
+                        <li class="dropdown messages-menu">
+                            <!-- Menu toggle button -->
+                            <a href="{% url 'login' %}">Acesse sua conta</a>
+                        </li>
+                    
+
+                        <!-- /.messages-menu -->
+
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+
+                    </ul>
+                </div>
+            </nav>
+        </header>

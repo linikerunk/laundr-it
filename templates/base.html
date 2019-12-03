@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="br">
+<head>
+{% block title %} <title>LaundrIT</title> {% endblock %}
+{% include 'parciais/_head.html' %}
+</head>
+
+<body class="hold-transition skin-blue sidebar-minifixed">
+    <div class="wrapper">
+
+       {% include 'parciais/_nav_home.html'%}
+       
+    
+     <aside class="main-sidebar">
+
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+
+            {% if "/" == request.path %}
+            {% block sidebar %}
+            <br><br><br>
+             <ul class="sidebar-menu" data-widget="tree">
+          <li><a href="#servico"><i class="fa  fa-reorder"></i> <span>Serviços</span></a></li>
+          <li><a href="#tabela-preco"><i class="fa fa-dollar"></i> <span>Tabela de preços e serviços</span></a></li>
+          <li><a href="#horario"><i class="fa fa-clock-o"></i> <span>Horário de atendimento</span></a></li>
+          <li><a href="#sobre"><i class="fa  fa-info"></i> <span>Sobre a empresa</span></a></li>
+          <li><a href="#contato"><i class="fa fa-phone"></i> <span>Contato</span></a></li>
+      </ul>
+                <!-- /.sidebar-menu -->
+                {% endblock %}
+                  {% else %}
+                  {% endif %}
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+ <div class="content-wrapper">
+ 
+
+      <section class="content container-fluid">
+      {% block main %}
+
+      {% endblock %}
+      </section>
+
+            </div>
+
+    {% include 'parciais/_footer.html' %}
+     {% include 'parciais/_scripts.html' %}
+        </div>
+
+</body>
+</html>

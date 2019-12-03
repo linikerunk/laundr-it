@@ -1,0 +1,197 @@
+{% extends 'base_logado.html' %}
+{% load static %}
+{% load bootstrap %}
+{% block sidebar %}
+<!-- Sidebar user panel (optional) -->
+                {% if not user.is_superuser %}
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src=" {% static 'img\usuario_teste.jpg' %} " class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                    <br>
+                        <p>{{user.cliente.nome_cliente}}</p>
+                        <!-- Status -->
+                    </div>
+                </div>
+                {% else %}
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src=" {% static 'img\usuario_teste.jpg' %} " class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                    <br>
+                        <p style="font-size: 12px;">{{user.first_name}}</p>
+                        <!-- Status -->
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- search form (Optional) -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Buscar...">
+                        <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+  <ul class="sidebar-menu" data-widget="tree">
+            {% if user.is_superuser %}
+          <li><a href="{% url 'inicial' %}"><i class="fa  fa-desktop"></i> <span>CADASTROS</span></a></li>
+          <li class="active"><a href="{% url 'pedidos_admin' %}"><i class="fa fa-cart-plus"></i> <span>PEDIDOS</span></a></li>
+          <li><a href="{% url 'historico_admin' %}"><i class="fa fa-file-text-o"></i> <span>HISTÓRICO</span></a></li>
+          <li><a href="{% url 'status_admin' %}"><i class="fa fa-exchange"></i> <span>STATUS</span></a></li>
+          <li><a href="{% url 'suporte_admin' %}"><i class="fa fa-user"></i> <span>SUPORTE</span></a></li>
+      </ul>
+          {% else %}
+          <ul class="sidebar-menu" data-widget="tree">
+          <li><a href="{% url 'inicial' %}"><i class="fa fa-bar-chart"></i> <span>DASHBOARD</span></a></li>
+          <li class="active"><a href="{% url 'pedidos_usuario' %}"><i class="fa fa-cart-plus"></i> <span>PEDIDOS</span></a></li>
+          <li><a href="{% url 'historico_usuario' %}"><i class="fa fa-file-text-o"></i> <span>HISTÓRICO</span></a></li>
+          <li><a href="{% url 'status_usuario' %}"><i class="fa fa-exchange"></i> <span>STATUS</span></a></li>
+          <li><a href="{% url 'suporte_usuario' %}"><i class="fa fa-user"></i> <span>SUPORTE</span></a></li>
+      </ul>
+      {% endif %}
+{% endblock %}
+
+{% block main %}
+
+
+<div class="container">
+<div class="row">
+<div class="col-md-11">
+
+          <div class="box box-danger">
+            <div class="box-header">
+              <h3 class="box-title">Pedido  Número [{{ pedido.id }}] </h3>
+            </div>
+            <div class="box-body">
+
+        
+              <div class="col-md-4">
+              <div class="form-group">
+                <label>Nome do Cliente : </label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                  </div>
+                  <input type="text" class="form-control" id="solicitante" value="{{ pedido.solicitante }}" name="solicitante" disabled>
+                </div>
+               
+              </div>
+              
+              </div>
+
+              
+              <div class="col-md-4">
+              <div class="form-group">
+                <label>Data da Solicitação : </label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control" id="data_solicitacao" value="{{ pedido.data_solicitacao }}" name="data_solicitacao" disabled>
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form group -->
+              </div>
+
+              <div class="col-md-4">
+              <div class="form-group">
+                <label>Data para Entrega : </label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control" id="data_entrega" value="{{ pedido.data_entrega }}" name="data_entrega" disabled>
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form group -->
+              </div>
+
+              <div class="col-md-4">
+              <div class="form-group">
+                <label>Pagamento : </label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-cart-plus"></i>
+                  </div>
+                  <input type="text" class="form-control" id="pagamento" name="pagamento" value="{{ pedido.pagamento }}" disabled>
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form group -->
+              </div>
+
+              <div class="col-md-4">
+              <div class="form-group">
+                <label>Status do Pedido : </label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-tasks"></i>
+                  </div>
+                  <input type="text" class="form-control" id="situacao_pedido" name="situacao_pedido" value="{{ pedido.situacao_pedido }}" disabled>
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form group -->
+              </div>
+
+
+<div class="col-md-12">
+            <h5><strong>ITENS</strong></h5>
+
+            <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                <tr role="row">
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 10%;">Quantidade</th>
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 20%;">Serviço</th>
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 30%;">Itens</th>
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 10%;">Preço Unitário</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr role="row" class="even">
+                <td class="table-info"> <input type="number" name="quantidade" class="form-control" min="0" id="items_quantidade"> </td>
+                <td class="table-info">
+     <select class="form-control" name="servico" id="servico">
+                    <option value="">---------------------------------------</option>
+                    
+                  </select>
+                
+    </td>
+    <td class="table-info">
+     <select class="form-control" name="roupa" id="roupa">
+                    <option value="">---------------------------------------</option>
+                    
+                  </select>
+                
+    </td>
+    <td class="table-info" id="preco_unitario" name="preco_unitario"> R$ </td>
+    </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+              </table>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+</div>
+        </div>
+        </div>
+        </div>
+
+{% endblock %}

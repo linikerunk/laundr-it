@@ -1,0 +1,130 @@
+{% extends 'base_logado.html' %}
+{% load static %}
+{% load bootstrap %}
+{% block title %}  {% endblock %}
+{% block sidebar %}
+<!-- Sidebar user panel (optional) -->
+                {% if not user.is_superuser %}
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src=" {% static 'img\usuario_teste.jpg' %} " class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                    <br>
+                        <p>{{user.cliente.nome_cliente}}</p>
+                        <!-- Status -->
+                    </div>
+                </div>
+                {% else %}
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src=" {% static 'img\usuario_teste.jpg' %} " class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                    <br>
+                        <p style="font-size: 12px;">{{user.first_name}}</p>
+                        <!-- Status -->
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- search form (Optional) -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Buscar...">
+                        <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+                {% if user.is_superuser %}
+  <ul class="sidebar-menu" data-widget="tree">
+          <li><a href="{% url 'inicial' %}"><i class="fa  fa-desktop"></i> <span>CADASTROS</span></a></li>
+          <li><a href="{% url 'pedidos_admin' %}"><i class="fa fa-cart-plus"></i> <span>PEDIDOS</span></a></li>
+          <li><a href="{% url 'historico_admin' %}"><i class="fa fa-file-text-o"></i> <span>HISTÓRICO</span></a></li>
+          <li class="active"><a href="{% url 'status_admin' %}"><i class="fa fa-exchange"></i> <span>STATUS</span></a></li>
+          <li><a href="{% url 'suporte_admin' %}"><i class="fa fa-user"></i> <span>SUPORTE</span></a></li>
+      </ul>
+      {% else %}
+        <ul class="sidebar-menu" data-widget="tree">
+          <li><a href="{% url 'inicial' %}"><i class="fa fa-bar-chart"></i> <span>DASHBOARD</span></a></li>
+          <li><a href="{% url 'pedidos_usuario' %}"><i class="fa fa-cart-plus"></i> <span>PEDIDOS</span></a></li>
+          <li><a href="{% url 'historico_usuario' %}"><i class="fa fa-file-text-o"></i> <span>HISTÓRICO</span></a></li>
+          <li class="active"><a href="{% url 'status_usuario' %}"><i class="fa fa-exchange"></i> <span>STATUS</span></a></li>
+          <li><a href="{% url 'suporte_usuario' %}"><i class="fa fa-user"></i> <span>SUPORTE</span></a></li>
+      </ul>
+      {% endif %}
+
+{% endblock %}
+{% block main %}
+
+
+
+<div class="col-xs-8 col-md-offset-2">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Insira uma descrição para o Status do Pedido</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <form method="POST" enctype="multipart/form-data" action="#">
+            {% csrf_token %} {{ form.errors }}
+              <form role="form">
+
+
+            <div class="col-md-2">
+            <div class="form-group">
+            <label>Número do Pedido</label>
+            <select class="form-control" name="pedido" id="id_pedido">
+            <option  value="{{ pedido }}" id="id_pedido" name="pedido">{{ pedido }}</option>
+            </select>
+            </div>
+            </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Descrição Status</label>
+                  <textarea style="resize: none;" class="form-control" rows="3" name="comentario" id="comentario" placeholder="Comentário sobre o Pedido" spellcheck="false"></textarea>
+                </div>
+                </div>
+
+            <div class="col-md-3">
+            <div class="form-group">
+            <label>Status Pedido</label>
+            <select class="form-control" name="situacao_pedido" id="situacao_pedido">
+            <option value>----------------</option>
+            {% for statuspedido in statuspedido.all %}
+            <option value={{ statuspedido.id }}>{{ statuspedido }}</option>
+            {% endfor %}
+            </select>
+            </div>
+            </div>
+
+            <div class="col-md-5">
+            <div class="form-group">
+                <label>Data do Comentário:</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="date" class="form-control" id="data_comentario" name="data_comentario">
+                </div>
+                <!-- /.input group -->
+              </div>
+              </div>
+
+            </div>
+            <div class="box-footer">
+                    <button type="submit" value="submit" class="btn btn-primary">Salvar Novo Status</button>
+                    <a class="btn btn-warning" href="{% url 'status_admin' %}" role="button">Voltar</a>
+                </div>
+                 </form>
+            <!-- /.box-body -->
+          </div>
+          
+
+
+{% endblock %}

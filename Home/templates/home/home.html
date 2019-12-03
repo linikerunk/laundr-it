@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+
+
+{% block main %}
+
+<div class="row">
+<div class="col-md-12">
+
+<div class="box box-primary">
+            <div class="box-body" style="background-color: #F9F9FA">
+
+            <div class="col-md-4">
+                    <img src="{% static 'img\Lavadora.PNG' %}" style="max-width: 100%;" >
+                    </div>
+
+                  <div class="col-md-4">
+                    <img src="{% static 'img\Lavadora1.PNG' %}" style="max-width: 100%;">
+
+                  </div>
+                  <div class="col-md-4">
+                    <img src="{% static 'img\Lavandora2.PNG' %}" style="max-width: 100%;">
+                    </div>
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          
+</div>
+
+<div class="col-md-12">
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Promoções</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="2" class="active"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="item active">
+                    <img src="{% static 'img\black friday.jpg' %}">
+
+                    
+                  </div>
+                  <div class="item">
+                    <img src="{% static 'img\oferta.jpg' %}">
+
+                   
+                  </div>
+                  <div class="item">
+                    <img src="{% static 'img\local-lavanderia.jpg' %}">
+                  </div>
+                </div>
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                  <span class="fa fa-angle-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                  <span class="fa fa-angle-right"></span>
+                </a>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+<div class="col-md-12">
+          <div class="box box-primary" id="servico">
+
+              <h3 style="text-align: center; color: #3C8DBC; font-weight: bolder;">Serviços</h3>
+            
+            <!-- /.box-header -->
+            <div class="box-body">
+              
+                <div class="col-md-3">
+                <img src="{% static 'img\washing-machine.png' %}" style="width: 50%;">
+                <p style="font-size: 20px; color: #3C8DBC">Lavagem com cuidado e carinho </p>
+                </div>
+                 <div class="col-md-3">
+                 <img src="{% static 'img\dress.png' %}" style="width: 50%;">
+                 <p style="font-size: 20px; color: #3C8DBC">Especialista em roupas delicadas </p>
+                </div>
+                 <div class="col-md-3">
+                 <img src="{% static 'img\electric-iron.png' %}" style="width: 50%;">
+                 <p style="font-size: 20px; color: #3C8DBC">Roupas passadas e cheirosas </p>
+                </div>
+                <div class="col-md-3">
+                 <img src="{% static 'img\entrega.png' %}" style="width: 50%;">
+                 <p style="font-size: 20px; color: #3C8DBC">Entregamos para sua comodidade </p>
+                </div>
+    
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+
+<div class="col-md-12">
+          <div class="box box-primary" id="tabela-preco">
+
+              <h3 style="text-align: center; color: #3C8DBC; font-weight: bolder;">Tabela de Preços e Serviços</h3>
+
+            <div class="box-body">
+              <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                <thead>
+                <tr role="row">
+                <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1">Item</th>
+                <th class="sorting" tabindex="0" rowspan="1" colspan="1">Preço</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr role="row" class="odd">
+                  <td class="sorting_1">Serviço de lavagem</td>
+                  <td> R$ 4.00 </td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td class="sorting_1">Serviço de secagem</td>
+                  <td> R$ 2.00 </td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td class="sorting_1">Serviço de lavagem e secagem</td>
+                  <td>  R$ 5.00 </td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td class="sorting_1">Serviço de leva e traz</td>
+                  <td>   R$ 3.00 </td>
+                </tr>
+
+                <tr role="row" class="odd">
+                  <td class="sorting_1">Almofada</td>
+                  <td>    R$ 24.00 
+ </td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td class="sorting_1">Bermuda</td>
+                  <td>  R$ 7.00 </td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td class="sorting_1">Blazer / Paletó</td>
+                  <td>   R$ 18.00 </td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td class="sorting_1">Blusa </td>
+                  <td>    R$ 8.00 </td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td class="sorting_1">Calça Social</td>
+                  <td>   R$ 14.00 </td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td class="sorting_1">Camiseta</td>
+                  <td>   R$ 5.00 </td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td class="sorting_1">Camisa Social</td>
+                  <td>   R$ 10.00 </td>
+                </tr>
+                </tbody>
+               
+              </table></div></div><div class="row"><div class="col-sm-5"><div class="dataTables_info" id="example2_info"></div></div></div></div>
+            <ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+          <!-- /.box -->
+        </div>
+
+<div class="col-md-12">
+          <div class="box box-primary" id="horario">
+
+              <h3 style="text-align: center; color: #3C8DBC; font-weight: bolder;">Horário de Atendimento</h3>
+            
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="col-md-3 col-md-offset-5">
+                <img src="{% static 'img\clock.png' %}" style="min-width: 40%; max-width: 40%;">
+                </div>
+                <div class="col-md-5 col-md-offset-4">
+                <p style="font-size: 15px; color: black;">De segunda a sexta-feira das 08h00 às 18h00</p>
+                <p style="font-size: 15px; color: black;">Sábado das 08h00 às 14h00</p>
+                </div>
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+<div class="col-md-12">
+          <div class="box box-primary" id="sobre">
+
+              <h3 style="text-align: center; color: #3C8DBC; font-weight: bolder;">Sobre a Empresa</h3>
+            
+            <!-- /.box-header -->
+            <div class="box-body">
+
+          <h3 class="" style="text-align: center; color: #3C8DBC;">História</h3>
+<div class="col-md-8 col-md-offset-2">
+<p style="font-size: 15px;"> A Lavanderia Lava & Seca é uma empresa familiar, com
+ grande know-how no mercado de lavanderias de Indaiatuba. Fundada em
+ 2000, atende seus clientes com agilidade, cuidado e garantindo os melhores preços.</p>
+</div>
+
+<div class="col-md-8 col-md-offset-2">
+<h3 class="" style="text-align: center; color: #3C8DBC;">Nossa Missão</h3>
+</div>
+<div class="col-md-8 col-md-offset-2">
+<p style="font-size: 15px;">Atender às mais diversas necessidades do consumidor moderno em lavagens e serviços
+ que visam à comodidade do consumidor.</p>
+</div>
+
+<div class="col-md-8 col-md-offset-2">
+<h3 class="" style="text-align: center; color: #3C8DBC;">Nossa Visão</h3>
+</div>
+
+<div class="col-md-8 col-md-offset-2">
+<p style="font-size: 15px;">Ser referência para o mercado como uma marca rentável e sustentável, com alto valor
+ agregado para seus consumidores e parceiros.</p>
+</div>
+
+<div class="col-md-8 col-md-offset-2">
+<h3 class="" style="text-align: center; color: #3C8DBC;">Nossos Valores</h3>
+</div>
+<div class="col-md-8 col-md-offset-2">
+<ul style="font-size: 15px;">
+                <li>Visão de dono</li>
+                <li>Honestidade</li>
+                <li>Inovação</li>
+                <li>Espírito de equipe</li>
+                <li>Respeito ao próximo</li>
+                  <ul>
+</div>
+             
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+<div class="col-md-12">
+          <div class="box box-primary" id="contato">
+
+              <h3 style="text-align: center; color: #3C8DBC; font-weight: bolder;">Entre em Contato</h3>
+            
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="col-md-4 col-md-offset-5">
+                <img src="{% static 'img\operator.png' %}" style="min-width: 40%; max-width: 40%;">
+                </div>
+                <div class="col-md-5 col-md-offset-1">
+                <p style="font-size: 15px; color: black;">Telefone: (19) 3834-8000</p>      
+                <p style="font-size: 15px; color: black;">Celular: (19) 99547-0110</p>
+                <p style="font-size: 15px; color: black;">E-mail: laundrit.fatec@gmail.com</p>
+                </div>
+                <div class="col-md-5 col-md-offset-1">
+                <p style="font-size: 15px; color: black;">Rua: Thunder Cats, 1000</p>
+                <p style="font-size: 15px; color: black;">Bairro: Power Ranger </p>
+                <p style="font-size: 15px; color: black;">Cidade: Indaiatuba-SP  CEP: 13344-582</p>
+                </div>
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>        
+
+
+{% endblock %}

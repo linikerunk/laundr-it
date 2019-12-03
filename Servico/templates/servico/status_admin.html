@@ -1,0 +1,202 @@
+{% extends 'base_logado.html' %}
+{% load static %}
+{% load bootstrap %}
+{% block title %}  {% endblock %}
+{% block sidebar %}
+<!-- Sidebar user panel (optional) -->
+                {% if not user.is_superuser %}
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src=" {% static 'img\usuario_teste.jpg' %} " class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                    <br>
+                        <p>{{user.cliente.nome_cliente}}</p>
+                        <!-- Status -->
+                    </div>
+                </div>
+                {% else %}
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src=" {% static 'img\usuario_teste.jpg' %} " class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                    <br>
+                        <p style="font-size: 12px;">{{user.first_name}}</p>
+                        <!-- Status -->
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- search form (Optional) -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Buscar...">
+                        <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+                {% if user.is_superuser %}
+  <ul class="sidebar-menu" data-widget="tree">
+          <li><a href="{% url 'inicial' %}"><i class="fa  fa-desktop"></i> <span>CADASTROS</span></a></li>
+          <li><a href="{% url 'pedidos_admin' %}"><i class="fa fa-cart-plus"></i> <span>PEDIDOS</span></a></li>
+          <li><a href="{% url 'historico_admin' %}"><i class="fa fa-file-text-o"></i> <span>HISTÓRICO</span></a></li>
+          <li class="active"><a href="{% url 'status_admin' %}"><i class="fa fa-exchange"></i> <span>STATUS</span></a></li>
+          <li><a href="{% url 'suporte_admin' %}"><i class="fa fa-user"></i> <span>SUPORTE</span></a></li>
+      </ul>
+      {% else %}
+        <ul class="sidebar-menu" data-widget="tree">
+          <li><a href="{% url 'inicial' %}"><i class="fa fa-bar-chart"></i> <span>DASHBOARD</span></a></li>
+          <li><a href="{% url 'pedidos_usuario' %}"><i class="fa fa-cart-plus"></i> <span>PEDIDOS</span></a></li>
+          <li><a href="{% url 'historico_usuario' %}"><i class="fa fa-file-text-o"></i> <span>HISTÓRICO</span></a></li>
+          <li class="active"><a href="{% url 'status_usuario' %}"><i class="fa fa-exchange"></i> <span>STATUS</span></a></li>
+          <li><a href="{% url 'suporte_usuario' %}"><i class="fa fa-user"></i> <span>SUPORTE</span></a></li>
+      </ul>
+      {% endif %}
+
+{% endblock %}
+{% block main %}
+
+
+<div class="col-md-12">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#pedidos" data-toggle="tab" aria-expanded="true">Pedidos</a></li>
+              <li><a href="#status" data-toggle="tab">Status</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="pedidos">
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Pedidos Ativos</h3>
+
+              <div class="box-tools">
+                <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tbody>
+                <th> </th>
+                  <th>Código</th>
+                  <th>Nome do Cliente</th>
+                  <th>Data da Solicitação</th>
+                  <th>Data de Entrega</th>
+                  <th>Valor</th>
+                  <th>Pagamento</th>
+                  <th>Status</th>
+                </tr>
+                  <tr> 
+                  {% for pedido in pedido %}
+                  <td><a href="{% url 'status_comentar_status_pedido' pedido.id %}" class="edit-status" >
+                  <i class="fa fa-edit" aria-hidden="true" title="Editar"></i></a></td>
+                  <td>{{ pedido.id }}</td>
+                  <td>{{ pedido.solicitante.nome_cliente }}</td>
+                  <td>{{ pedido.data_solicitacao }}</td>
+                  <td>{{ pedido.data_entrega }}</td>
+                  <td>{{ pedido.valor_total }}</td>
+                  <td>{{ pedido.pagamento }}</td>
+                  <td>{{ pedido.situacao_pedido }}</td>             
+                </tr>
+                {% endfor %}
+              </tbody></table>
+                             <div class="box-footer clearfix">
+                           <ul class="pagination ">
+                    {% for pagina in pedido.paginator.page_range %} {% if pedido.number == pagina %}
+                    <li class="paginate_button active ">
+                        <a href="?p={{ pagina }}">{{ pagina }}</a></li>
+                    {% else %}
+                    <li class="paginate_button "><a class="page-link " href="?p={{ pagina }}">{{ pagina }}
+                    </a></li>
+                    {% endif %} {% endfor %}
+                </ul>
+            </div>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+
+        </div>
+        <!-- / .tab-->
+
+
+      
+
+              <div class="tab-pane" id="status">
+
+              <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Acompanhar Status</h3>
+
+              <div class="box-tools">
+                <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tbody>
+                  <th style="width : 10%;"> ID Pedido </th>
+                  <th> Nome do Cliente </th>
+                  <th>Situação</th>
+                  <th>Data Comentário</th>
+                  <th>Descrição</th>
+                </tr>
+                  <tr> 
+                  {% for status in status %}
+                  <td>{{ status.pedido }}</td>
+                  <td>{{ status.pedido.solicitante.nome_cliente }}
+                  <td>{{ status.situacao_pedido }}</td>
+                  <td>{{ status.data_comentario }}</td>
+                  <td><textarea style="resize: none;" rows="2" cols="50" disabled>{{ status.comentario }}</textarea></td>           
+                </tr>
+                {% endfor %}
+              </tbody></table>
+              <div class="box-footer clearfix">
+                          <div class="box-footer clearfix">
+                           <ul class="pagination ">
+                    {% for pagina in status.paginator.page_range %} {% if status.number == pagina %}
+                    <li class="paginate_button active ">
+                        <a href="?p={{ pagina }}">{{ pagina }}</a></li>
+                    {% else %}
+                    <li class="paginate_button "><a class="page-link " href="?p={{ pagina }}">{{ pagina }}
+                    </a></li>
+                    {% endif %} {% endfor %}
+                </ul>
+            </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+              
+            </div>
+
+
+
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+
+
+{% endblock %}

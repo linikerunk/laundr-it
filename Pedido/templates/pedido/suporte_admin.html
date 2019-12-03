@@ -1,0 +1,128 @@
+{% extends 'base_logado.html' %}
+{% load static %}
+{% load bootstrap %}
+{% block title %}  {% endblock %}
+{% block sidebar %}
+<!-- Sidebar user panel (optional) -->
+                {% if not user.is_superuser %}
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src=" {% static 'img\usuario_teste.jpg' %} " class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                    <br>
+                        <p>{{user.cliente.nome_cliente}}</p>
+                        <!-- Status -->
+                    </div>
+                </div>
+                {% else %}
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src=" {% static 'img\usuario_teste.jpg' %} " class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                    <br>
+                        <p style="font-size: 12px;">{{user.first_name}}</p>
+                        <!-- Status -->
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- search form (Optional) -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Buscar...">
+                        <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+                {% if user.is_superuser %}
+  <ul class="sidebar-menu" data-widget="tree">
+          <li><a href="{% url 'inicial' %}"><i class="fa  fa-desktop"></i> <span>CADASTROS</span></a></li>
+          <li><a href="{% url 'pedidos_admin' %}"><i class="fa fa-cart-plus"></i> <span>PEDIDOS</span></a></li>
+          <li><a href="{% url 'historico_admin' %}"><i class="fa fa-file-text-o"></i> <span>HISTÓRICO</span></a></li>
+          <li><a href="{% url 'status_admin' %}"><i class="fa fa-exchange"></i> <span>STATUS</span></a></li>
+          <li class="active"><a href="{% url 'suporte_admin'%}"><i class="fa fa-user"></i> <span>SUPORTE</span></a></li>
+      </ul>
+      {% else %}
+        <ul class="sidebar-menu" data-widget="tree">
+          <li><a href="{% url 'inicial' %}"><i class="fa fa-bar-chart"></i> <span>DASHBOARD</span></a></li>
+          <li><a href="{% url 'pedidos_usuario' %}"><i class="fa fa-cart-plus"></i> <span>PEDIDOS</span></a></li>
+          <li><a href="{% url 'historico_usuario' %}"><i class="fa fa-file-text-o"></i> <span>HISTÓRICO</span></a></li>
+          <li><a href="{% url 'status_usuario' %}"><i class="fa fa-exchange"></i> <span>STATUS</span></a></li>
+          <li class="active"><a href="{% url 'suporte_usuario' %}"><i class="fa fa-user"></i> <span>SUPORTE</span></a></li>
+      </ul>
+      {% endif %}
+
+{% endblock %}
+{% block main %}
+
+<h4>SUPORTE ADMINISTRADOR </h4>
+{% include 'parciais/_messages.html' %}
+<div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Últimas Perguntas Realizadas</h3>
+
+              <div class="box-tools">
+                <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Pesquisar">
+
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tbody><tr>
+                <th style="width: 1%;"> </th>
+                  <th style="width: 17%;">Usuário</th>
+                  <th style="width: 12%;">CPF</th>
+                  <th style="width: 20%;">E-mail</th>
+                  <th style="width: 20%;">Comentário</th>
+                  <th style="width: 12%;">Data da Postagem</th>
+                </tr>
+                <tr>
+                {% for suporte in suporte %}
+                <td><a href="{% url 'responder_suporte' suporte.id %}" class="edit-status" >
+                  <i class="fa fa-edit" aria-hidden="true" title="Responder"></i></a></td>
+                  <td>{{ suporte.nome_cliente }}</td>
+                  <td>{{ suporte.cpf }}</td>
+                  <td>{{ suporte.email }}</td>
+                  <td><textarea style="resize: none;" id="story" name="story"
+          rows="2" cols="35" disabled>{{ suporte.mensagem }}</textarea></td>
+                  <td>{{ suporte.data_mensagem }}</td>
+                </tr>
+                {% endfor %}
+              </tbody></table>
+              
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+                          <div class="box-footer clearfix">
+                           <ul class="pagination ">
+                    {% for pagina in suporte.paginator.page_range %} {% if suporte.number == pagina %}
+                    <li class="paginate_button active ">
+                        <a href="?q={{ pagina }}">{{ pagina }}</a></li>
+                    {% else %}
+                    <li class="paginate_button "><a class="page-link " href="?q={{ pagina }}">{{ pagina }}
+                    </a></li>
+                    {% endif %} {% endfor %}
+                </ul>
+            </div>
+
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+
+
+{% endblock %}
