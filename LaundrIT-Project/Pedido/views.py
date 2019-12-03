@@ -182,8 +182,15 @@ def responder_suporte(request, id):
 
 def ver_pedido(request, id):
         pedido = get_object_or_404(Pedido, pk=id)
-        form = PedidoForm(request.POST or None, request.FILES or None)
+        
+    
+
+        forms = PedidoForm(request.POST, request.FILES, instance=pedido)
+        formset = ItemForm(
+            request.POST, request.FILES)
         return render(request, 'pedido/ver_pedido.html', {
-            'form': form,
+            'forms': forms,
             'pedido': pedido,
+            'formset': formset,
             } )
+            

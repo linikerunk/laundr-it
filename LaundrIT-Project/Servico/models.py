@@ -14,4 +14,4 @@ class Servico(UUIDModel, TimeStampedModel):
         ordering = ('-nome_servico',)
 
     def __str__(self):
-        return self.nome_servico
+        return "%s    %s" % (self.nome_servico, self.preco_servico)

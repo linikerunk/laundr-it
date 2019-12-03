@@ -103,7 +103,7 @@ class Roupa(UUIDModel, TimeStampedModel):
         ordering = ('-nome_peca',)
 
     def __str__(self):
-        return self.nome_peca
+        return "%s    %s " % (self.nome_peca, self.preco_roupa)
 
 class Item(TimeStampedModel):
     quantidade = models.PositiveIntegerField(verbose_name='Quantidade', default=1)
