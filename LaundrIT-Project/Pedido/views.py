@@ -70,7 +70,7 @@ def pedidos_usuario(request):
             formset.save()
             forms.save()
             messages.info(request, 'Verifique seu pedido para concluir a compra.')
-            return redirect('pagamento')
+            redirect('pagamento', pedido_id=forms.pk)
     else:
         forms = PedidoForm(instance=pedido_forms, prefix='pedido')
         formset = item_pedido_formset(instance=pedido_forms, prefix='itens')
@@ -91,8 +91,13 @@ def update_item(request):
     return render(request, 'pedido/pedidos.html')
 
 @login_required
-def pagamento(request):
-    return render(request, 'pedido/pagamento.html')
+def pagamento(request, pedido_id):
+    pedido = get_object_or_404(Pedido, pk=pedido_id)
+    items = pedido.items.all()
+
+    return render(request, 'pedido/pagamento.html', 
+    {'items': items,
+    'pedido': pedido})
 
 @login_required
 def suporte_admin(request):
@@ -188,9 +193,12 @@ def ver_pedido(request, id):
         forms = PedidoForm(request.POST, request.FILES, instance=pedido)
         formset = ItemForm(
             request.POST, request.FILES)
+        
+        items = pedido.items.all()
         return render(request, 'pedido/ver_pedido.html', {
             'forms': forms,
             'pedido': pedido,
             'formset': formset,
+            'items' : items,
             } )
             

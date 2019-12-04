@@ -65,42 +65,27 @@
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-            <i class="fa fa-globe"></i> AdminLTE, Inc.
-            <small class="pull-right">Date: 2/10/2014</small>
+            <i class="fa fa-globe"></i> LaundrIT, LTDA.
+            <small class="pull-right">Data: {{ pedido.data_solicitacao }}</small>
           </h2>
         </div>
         <!-- /.col -->
       </div>
       <!-- info row -->
       <div class="row invoice-info">
-        <div class="col-sm-4 invoice-col">
-          From
+        <div class="col-sm-8 invoice-col">
+          De
           <address>
-            <strong>Admin, Inc.</strong><br>
-            795 Folsom Ave, Suite 600<br>
-            San Francisco, CA 94107<br>
-            Phone: (804) 123-5432<br>
-            Email: info@almasaeedstudio.com
+            <strong>{{ pedido.solicitante.nome_cliente }}, {{ pedido.solicitante.endereco }}<br>
+            CPF : {{ pedido.solicitante.cpf }}<br>
+            Phone: {{ pedido.solicitante.telefone }}<br>
+            Email: {{ pedido.solicitante.user.email }}
           </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
-          To
-          <address>
-            <strong>John Doe</strong><br>
-            795 Folsom Ave, Suite 600<br>
-            San Francisco, CA 94107<br>
-            Phone: (555) 539-1037<br>
-            Email: john.doe@example.com
-          </address>
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-          <b>Invoice #007612</b><br>
-          <br>
-          <b>Order ID:</b> 4F3S8J<br>
-          <b>Payment Due:</b> 2/22/2014<br>
-          <b>Account:</b> 968-34567
+         
+          <b>Número Pedido :</b> {{ pedido.id }}<br>
         </div>
         <!-- /.col -->
       </div>
@@ -112,42 +97,23 @@
           <table class="table table-striped">
             <thead>
             <tr>
-              <th>Qty</th>
-              <th>Product</th>
-              <th>Serial #</th>
-              <th>Description</th>
-              <th>Subtotal</th>
+              <th>Serviço/Preço</th>
+              <th>Item/Preço</th>
+              <th>Preço Unitário</th>
+              <th>Quantidade</th>
+              <th>Valor Item</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>1</td>
-              <td>Call of Duty</td>
-              <td>455-981-221</td>
-              <td>El snort testosterone trophy driving gloves handsome</td>
-              <td>$64.50</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Need for Speed IV</td>
-              <td>247-925-726</td>
-              <td>Wes Anderson umami biodiesel</td>
-              <td>$50.00</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Monsters DVD</td>
-              <td>735-845-642</td>
-              <td>Terry Richardson helvetica tousled street art master</td>
-              <td>$10.70</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Grown Ups Blue Ray</td>
-              <td>422-568-642</td>
-              <td>Tousled lomo letterpress</td>
-              <td>$25.99</td>
-            </tr>
+            {% for item in pedido.items.all %}
+                <tr>
+                  <td> {{ item.servico }}</td>
+                  <td> {{ item.roupa }}</td>
+                  <td> {{ item.preco_unitario }}</td>
+                  <td> {{ item.quantidade }}</td>
+                  <td> {{ item.total_item }}</td>
+                </tr>
+                 {% endfor %}
             </tbody>
           </table>
         </div>
@@ -158,20 +124,20 @@
       <div class="row">
         <!-- accepted payments column -->
         <div class="col-xs-6">
-          <p class="lead">Payment Methods:</p>
-          <img src="../../dist/img/credit/visa.png" alt="Visa">
-          <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-          <img src="../../dist/img/credit/american-express.png" alt="American Express">
-          <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+          <p class="lead">Métodos de Pagamento :</p>
+          <img src="{% static 'img\visa.png' %}" alt="Visa">
+          <img src="{% static 'img\mastercard.png' %}" alt="Mastercard">
+          <img src="{% static 'img\american-express.png' %}" alt="American Express">
+          <img src="{% static 'img\paypal2.png' %}" alt="Paypal">
 
           <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
-            dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+        Boletos bancários serão validados só depois de três dias uteis.
+        Obrigado
           </p>
         </div>
         <!-- /.col -->
         <div class="col-xs-6">
-          <p class="lead">Amount Due 2/22/2014</p>
+          <p class="lead">Data da Entrega  {{ pedido }}</p>
 
           <div class="table-responsive">
             <table class="table">
@@ -180,16 +146,12 @@
                 <td>$250.30</td>
               </tr>
               <tr>
-                <th>Tax (9.3%)</th>
-                <td>$10.34</td>
-              </tr>
-              <tr>
-                <th>Shipping:</th>
-                <td>$5.80</td>
+                <th>Tax (0.0%)</th>
+                <td>$00.00</td>
               </tr>
               <tr>
                 <th>Total:</th>
-                <td>$265.24</td>
+                <td>${{ pedido.valor_total }}</td>
               </tr>
             </tbody></table>
           </div>
