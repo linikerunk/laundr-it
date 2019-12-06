@@ -17,3 +17,10 @@ div.login-box-body {
 span#nome-usuario {
     color: black;
 }
+
+select.form-control{
+    width: 30%;
+}
+input.datetimeinput.form-control{
+    width: 30%;
+}

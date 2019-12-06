@@ -95,8 +95,8 @@
             <label>Status Pedido</label>
             <select class="form-control" name="situacao_pedido" id="situacao_pedido">
             <option value>----------------</option>
-            {% for statuspedido in statuspedido.all %}
-            <option value={{ statuspedido.id }}>{{ statuspedido }}</option>
+            {% for status in statuspedido.all %}
+            <option value={{ status.situacao_pedido }}>{{status.situacao_pedido}}</option>
             {% endfor %}
             </select>
             </div>

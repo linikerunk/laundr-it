@@ -53,6 +53,9 @@ def pedidos_admin(request):
 def pedidos_usuario(request):
     if request.user.is_superuser:
         return HttpResponseNotFound("Acesso Negado!")
+    
+
+    cliente = request.user
 
     pedido_forms = Pedido()
     item_pedido_formset = inlineformset_factory(Pedido, Item, form=ItemForm, extra=2, can_delete=False, min_num=1, validate_min=True)
@@ -77,6 +80,7 @@ def pedidos_usuario(request):
     context = {
         'forms': forms,
         'formset': formset,
+        'cliente' : cliente,
     }
     return render(request, 'pedido/pedidos.html', context)
 
@@ -95,7 +99,7 @@ def pagamento(request):
     '''
     pedido = get_object_or_404(Pedido, pk=pedido_id)
     items = pedido.items.all()
-'''
+    '''
 
     return render(request, 'pedido/pagamento.html', 
   )

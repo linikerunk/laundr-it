@@ -260,13 +260,15 @@ def status_comentar_status_pedido(request, id):
         pedido = get_object_or_404(Pedido, pk=id)
         status = Status.objects.all()
         statuspedido = StatusPedido.objects.all()
-        print(statuspedido)
         pedido_escolha = Pedido.objects.all()
         form = StatusForm(request.POST or None, request.FILES or None)
         
+        Pedido.situacao_pedido = Status.situacao_pedido
         if form.is_valid():
+
             form.save()
             return redirect('status_admin')
+
         return render(request, 'servico/status_comentar_admin.html', {
             'form': form,
             'status': status,
@@ -276,7 +278,6 @@ def status_comentar_status_pedido(request, id):
         })
     else:
         return HttpResponseNotFound("Acesso Negado!")
-
 
 # aqui é usuário ... 
 
